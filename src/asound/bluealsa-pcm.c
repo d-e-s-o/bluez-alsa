@@ -842,8 +842,7 @@ static int bluealsa_poll_descriptors(snd_pcm_ioplug_t *io, struct pollfd *pfd,
 	struct bluealsa_pcm *pcm = io->private_data;
 
 	nfds_t dbus_nfds = nfds - 1;
-	if (!bluealsa_dbus_connection_poll_fds(&pcm->dbus_ctx, &pfd[1], &dbus_nfds))
-		return -EINVAL;
+	(void)bluealsa_dbus_connection_poll_fds(&pcm->dbus_ctx, &pfd[1], &dbus_nfds);
 
 	/* PCM plug-in relies on our internal event file descriptor. */
 	pfd[0].fd = pcm->event_fd;
